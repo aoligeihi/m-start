@@ -1,6 +1,8 @@
 package com.yy.star.service.impl;
 
 import com.yy.star.service.FileService;
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -100,5 +102,35 @@ public class FileServiceImpl implements FileService {
         }
         String formattedDateTime = localDateTime.format(formatter);
         return formattedDateTime;
+    }
+
+    /**
+     * 文件上传ftp
+     * @param file
+     * @return
+     */
+    public String handleFileUploadFtp(MultipartFile file) {
+        // 获取文件名
+        String fileName = file.getOriginalFilename();
+
+        // 连接到 FTP 服务器
+        FTPClient ftpClient = new FTPClient();
+        try {
+            ftpClient.connect("ftp.example.com");
+            ftpClient.login("username", "password");
+            ftpClient.enterLocalPassiveMode();
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+
+            // 上传文件
+            ftpClient.storeFile(fileName, file.getInputStream());
+
+            // 注销并断开连接
+            ftpClient.logout();
+            ftpClient.disconnect();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return "success";
     }
 }
