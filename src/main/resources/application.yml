@@ -1,0 +1,28 @@
+server:
+  port: 8089 # 配置端口
+#  servlet:
+#    context-path: /main #
+#  profiles:
+#    active: dev # 指定配置文件
+
+spring:
+  datasource:
+    name: dev
+    url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=GMT%2B8&useSSL=false&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  web:
+    resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/static,classpath:/resources/,file:{web.resource-path}
+  mvc:
+    static-path-pattern: /resources/**
+  favicon:
+    enabled: false
+  servlet:
+    multipart:
+      max-request-size: 50MB
+      max-file-size: 50MB
+
+web:
+  resource-path: D:/ideaworkspace/star_file/ # 该目录为项目所在目录 中的star_file穆勒
