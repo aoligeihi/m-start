@@ -1,4 +1,4 @@
-package com.yy.star.demo.java_jdk;
+package com.yy.star.demo.java;
 
 import java.text.DateFormat;
 import java.util.Date;
