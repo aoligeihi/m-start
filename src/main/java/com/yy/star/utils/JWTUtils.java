@@ -20,7 +20,7 @@ public class JWTUtils {
     public static String getToken(Map<String, String> map) {
         // 当前时间后两小时
         LocalDateTime nowDime = LocalDateTime.now();
-        LocalDateTime localDateTime = nowDime.plusSeconds(10);// 默认10s
+        LocalDateTime localDateTime = nowDime.plusSeconds(1800);// 默认10s
         JWTCreator.Builder builder = JWT.create();
         map.forEach((k, v) -> {
             builder.withClaim(k, v);
