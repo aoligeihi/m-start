@@ -17,13 +17,13 @@ public class JWTUtils {
     /**
      * 生成token header.payload.sing
      */
-    public static String getToken(Map<String, String> map) {
+    public static String getToken(Map<String, Object> map) {
         // 当前时间后两小时
         LocalDateTime nowDime = LocalDateTime.now();
         LocalDateTime localDateTime = nowDime.plusSeconds(1800);// 默认10s
         JWTCreator.Builder builder = JWT.create();
         map.forEach((k, v) -> {
-            builder.withClaim(k, v);
+            builder.withClaim(k, v.toString());
         });
         String token = builder.withExpiresAt(Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant()))//设置过期时间
                 .sign(Algorithm.HMAC256(SING));// sign
