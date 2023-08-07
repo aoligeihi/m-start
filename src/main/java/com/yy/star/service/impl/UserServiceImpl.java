@@ -19,11 +19,7 @@ import java.time.LocalDateTime;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private final UserDao userDao;
-
-    public UserServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
-    }
+    private UserDao userDao;
 
     /**
      * 通过id获取User
@@ -58,7 +54,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public Integer createUser(User user) {
+    public String createUser(User user) {
         user.setCreateTime(LocalDateTime.now());
         user.setUpdateTime(LocalDateTime.now());
         User save = userDao.save(user);

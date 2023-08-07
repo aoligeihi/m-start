@@ -23,6 +23,6 @@ public interface UserService {
      * @param user
      * @return
      */
-    Integer createUser(User user);
+    String createUser(User user);
 
 }

@@ -61,7 +61,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/create/user")
-    public Integer createUser(User user) {
+    public String createUser(User user) {
         return userService.createUser(user);
     }
 }
