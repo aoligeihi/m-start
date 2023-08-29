@@ -25,7 +25,7 @@ public class FileServiceImpl implements FileService {
             // 检查文件类型 限制文件大小
             if (file.getSize() > 52428800) {
                 // 文件大小超过50MB，拒绝上传
-                return file.getSize()+" 拒绝上传";
+                return file.getSize() + " 拒绝上传";
             }
 
             // 存放目标目录
@@ -40,7 +40,7 @@ public class FileServiceImpl implements FileService {
             String newFileName = formatDate(LocalDateTime.now(), "datetime") + suffixName;
             File dest = new File(fullPath, newFileName);
             file.transferTo(dest);
-            return newFileName;
+            return fullPath;
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -106,6 +106,7 @@ public class FileServiceImpl implements FileService {
 
     /**
      * 文件上传ftp
+     *
      * @param file
      * @return
      */
