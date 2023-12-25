@@ -34,7 +34,7 @@ public class Demo {
 
 //        Map<String, Object> toMap = BeanUtil.beanToMap(dto);
         System.out.println(toMap);
-        PdfUtil.fillTemplate(getFile(model).getPath(), "1.pdf", toMap);
+        PdfUtil.fillTemplate(getFile(model).getPath(), "D://1.pdf", toMap);
 
     }
 

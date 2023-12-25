@@ -1,5 +1,5 @@
 server:
-  port: 8089 # 配置端口
+  port: 8990 # 配置端口
 #  servlet:
 #    context-path: /main #
 #  profiles:

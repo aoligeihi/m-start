@@ -5,10 +5,7 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -34,6 +31,40 @@ public class FileController {
         return fileService.fileUpload(file);
     }
 
+
+    /**
+     * @param response
+     * @throws IOException
+     */
+    @GetMapping("{id}")
+    public void downloadFile(HttpServletResponse response, @PathVariable String id) throws IOException {
+        String str = "D://ideaworkspace/star_file/fileupload/2023-08-29/20230829100851257.jpg";
+        if ("nw".equals(id)) {
+            str = "D:\\appazb/nw.apk";
+        } else if ("ww".equals(id)) {
+            str = "D:\\appazb/ww.apk";
+        }
+        // 指定要下载的文件路径
+        Path file = Paths.get(str);
+        // 检查文件是否存在
+        if (Files.exists(file)) {
+            // 设置响应头
+            response.setContentType("application/octet-stream");
+            response.addHeader("Content-Disposition", "attachment; filename=" + file.getFileName());
+            // 将文件内容写入响应流
+            try (InputStream inputStream = Files.newInputStream(file)) {
+                int read;
+                byte[] bytes = new byte[1024];
+                while ((read = inputStream.read(bytes)) != -1) {
+                    response.getOutputStream().write(bytes, 0, read);
+                }
+            }
+        } else {
+            // 文件不存在时返回 404 错误
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+    }
+
     /**
      *
      * @param response
@@ -47,7 +78,7 @@ public class FileController {
         if (Files.exists(file)) {
             // 设置响应头
             response.setContentType("application/octet-stream");
-            response.addHeader("Content-Disposition", "attachment; filename=myfile.jpg");
+            response.addHeader("Content-Disposition", "attachment; filename=" + file.getFileName());
             // 将文件内容写入响应流
             try (InputStream inputStream = Files.newInputStream(file)) {
                 int read;

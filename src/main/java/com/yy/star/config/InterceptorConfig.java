@@ -9,9 +9,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new JWTInterceptor())
-                .addPathPatterns("/**") // 其他接口tocken验证
-                .excludePathPatterns("/user/login")
-                .excludePathPatterns("/create/user");// 验证接口放行
+//        registry.addInterceptor(new JWTInterceptor())
+//                .addPathPatterns("/**") // 其他接口tocken验证
+//                .excludePathPatterns("/user/login")
+//                .excludePathPatterns("/create/user").excludePathPatterns("/file");// 验证接口放行
     }
 }
